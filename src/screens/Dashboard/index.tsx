@@ -1,6 +1,8 @@
-import React from 'react';
-import { HighlightCard } from '../../global/components/HighlightCard';
-import { HighlightCards } from '../../global/components/HighlightCard/styles';
+import React from "react";
+import { getBottomSpace } from "react-native-iphone-x-helper";
+import { HighlightCard } from "../../global/components/HighlightCard";
+import { HighlightCards } from "../../global/components/HighlightCard/styles";
+import { TransactionCard } from "../../global/components/TransactionCard";
 import {
   Container,
   Header,
@@ -11,16 +13,61 @@ import {
   Username,
   UserWrapper,
   Icon,
-} from './styles';
+  Transactions,
+  TransacrionsTitle,
+  TransactionList,
+} from "./styles";
 
 export function Dashboard() {
+  const data = [
+    {
+      title: "Desenvolvimento de site",
+      amount: "R$ 12.000,00",
+      date: "04/07/1996",
+      category: {
+        icon: "dollar-sign",
+        name: "Vendas",
+      },
+    },
+    {
+      title: "Desenvolvimento de site",
+      amount: "R$ 12.000,00",
+      date: "04/07/1996",
+      category: {
+        icon: "dollar-sign",
+        name: "Vendas",
+      },
+    },
+
+    {
+      title: "Desenvolvimento de site",
+      amount: "R$ 12.000,00",
+      date: "04/07/1996",
+      category: {
+        icon: "dollar-sign",
+        name: "Vendas",
+      },
+    },
+    {
+      title: "Desenvolvimento de site",
+      amount: "R$ 12.000,00",
+      date: "04/07/1996",
+      category: {
+        icon: "dollar-sign",
+        name: "Vendas",
+      },
+    },
+  ];
+
   return (
     <Container>
       <Header>
         <UserWrapper>
           <UserInfo>
             <Photo
-              source={{ uri: 'https://avatars.githubusercontent.com/u/80408016?v=4' }}
+              source={{
+                uri: "https://avatars.githubusercontent.com/u/80408016?v=4",
+              }}
             />
             <User>
               <UserGretting>Olá,</UserGretting>
@@ -50,6 +97,18 @@ export function Dashboard() {
           lastTransaction="Última entrada dia 19 de abril"
         />
       </HighlightCards>
+
+      <Transactions>
+        <TransacrionsTitle>Listagem</TransacrionsTitle>
+        <TransactionList
+          data={data}
+          renderItem={({ item }) => <TransactionCard data={item} />}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingBottom: getBottomSpace()
+          }}
+        />
+      </Transactions>
     </Container>
-  )
+  );
 }
