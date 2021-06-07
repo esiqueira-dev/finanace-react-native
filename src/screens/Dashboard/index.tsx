@@ -1,8 +1,7 @@
 import React from "react";
-import { getBottomSpace } from "react-native-iphone-x-helper";
 import { HighlightCard } from "../../global/components/HighlightCard";
 import { HighlightCards } from "../../global/components/HighlightCard/styles";
-import { TransactionCard } from "../../global/components/TransactionCard";
+import { TransactionCard, TransactionCardProps } from "../../global/components/TransactionCard";
 import {
   Container,
   Header,
@@ -18,9 +17,15 @@ import {
   TransactionList,
 } from "./styles";
 
+export interface DataListProps extends TransactionCardProps {
+  id: string;
+}
+
 export function Dashboard() {
-  const data = [
+  const data: DataListProps[] = [
     {
+      id: '1',
+      type: 'positive',
       title: "Desenvolvimento de site",
       amount: "R$ 12.000,00",
       date: "04/07/1996",
@@ -30,25 +35,31 @@ export function Dashboard() {
       },
     },
     {
+      id: '2',
+      type: 'negative',
       title: "Desenvolvimento de site",
       amount: "R$ 12.000,00",
       date: "04/07/1996",
       category: {
-        icon: "dollar-sign",
-        name: "Vendas",
+        icon: "coffee",
+        name: "Alimentação",
       },
     },
 
     {
+      id: '3',
+      type: 'negative',
       title: "Desenvolvimento de site",
       amount: "R$ 12.000,00",
       date: "04/07/1996",
       category: {
-        icon: "dollar-sign",
+        icon: "shopping-bag",
         name: "Vendas",
       },
     },
     {
+      id: '4',
+      type: 'negative',
       title: "Desenvolvimento de site",
       amount: "R$ 12.000,00",
       date: "04/07/1996",
@@ -102,11 +113,8 @@ export function Dashboard() {
         <TransacrionsTitle>Listagem</TransacrionsTitle>
         <TransactionList
           data={data}
+          keyExtractor={( item ) => item.id}
           renderItem={({ item }) => <TransactionCard data={item} />}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
-            paddingBottom: getBottomSpace()
-          }}
         />
       </Transactions>
     </Container>
